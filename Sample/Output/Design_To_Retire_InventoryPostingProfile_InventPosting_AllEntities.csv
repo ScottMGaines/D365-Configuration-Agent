@@ -1,0 +1,109 @@
+dataAreaId,InventAccountType,ItemCode,ItemRelation,CustVendCode,CustVendRelation,MainAccount
+USMF,Inventory receipt,Group,FG,All,,1303000
+USMF,Inventory issue,Group,FG,All,,1303000
+USMF,"Inventory expenditure, profit",Group,FG,All,,5101000
+USMF,"Inventory expenditure, loss",Group,FG,All,,5101000
+USMF,"Purchase expenditure, un-invoiced",Group,FG,All,,2102000
+USMF,"Purchase, inventory receipt",Group,FG,All,,1303000
+USMF,"Purchase, expenditure for product",Group,FG,All,,5101000
+USMF,"Cost of units, delivered",Group,FG,All,,1303000
+USMF,"Cost of goods sold, delivered",Group,FG,All,,5101000
+USMF,"Cost of units, invoiced",Group,FG,All,,1303000
+USMF,"Cost of goods sold, invoiced",Group,FG,All,,5101000
+USMF,Revenue,Group,FG,All,,4101000
+USMF,"Deferred revenue on delivery",Group,FG,All,,2301000
+USMF,"Deferred revenue offset on delivery",Group,FG,All,,4101000
+USMF,"Deferred sales tax on delivery",Group,FG,All,,2210000
+USMF,Inventory receipt,Group,RM,All,,1301000
+USMF,Inventory issue,Group,RM,All,,1301000
+USMF,"Inventory expenditure, profit",Group,RM,All,,5101000
+USMF,"Inventory expenditure, loss",Group,RM,All,,5101000
+USMF,"Purchase expenditure, un-invoiced",Group,RM,All,,2102000
+USMF,"Purchase, inventory receipt",Group,RM,All,,1301000
+USMF,"Purchase, expenditure for product",Group,RM,All,,5101000
+USMF,Purchase expenditure for expense,Group,SVC,All,,5201000
+USMF,Inter-unit receivable,Group,FG,All,,1315000
+USMF,Inter-unit payable,Group,FG,All,,2315000
+USMF,Inter-unit receivable,Group,RM,All,,1315000
+USMF,Inter-unit payable,Group,RM,All,,2315000
+USSE,Inventory receipt,Group,FG,All,,1303000
+USSE,Inventory issue,Group,FG,All,,1303000
+USSE,"Inventory expenditure, profit",Group,FG,All,,5101000
+USSE,"Inventory expenditure, loss",Group,FG,All,,5101000
+USSE,"Purchase expenditure, un-invoiced",Group,FG,All,,2102000
+USSE,"Purchase, inventory receipt",Group,FG,All,,1303000
+USSE,"Purchase, expenditure for product",Group,FG,All,,5101000
+USSE,"Cost of units, delivered",Group,FG,All,,1303000
+USSE,"Cost of goods sold, delivered",Group,FG,All,,5101000
+USSE,"Cost of units, invoiced",Group,FG,All,,1303000
+USSE,"Cost of goods sold, invoiced",Group,FG,All,,5101000
+USSE,Revenue,Group,FG,All,,4101000
+USSE,"Deferred revenue on delivery",Group,FG,All,,2301000
+USSE,"Deferred revenue offset on delivery",Group,FG,All,,4101000
+USSE,"Deferred sales tax on delivery",Group,FG,All,,2210000
+USSE,Inventory receipt,Group,RM,All,,1301000
+USSE,Inventory issue,Group,RM,All,,1301000
+USSE,"Inventory expenditure, profit",Group,RM,All,,5101000
+USSE,"Inventory expenditure, loss",Group,RM,All,,5101000
+USSE,"Purchase expenditure, un-invoiced",Group,RM,All,,2102000
+USSE,"Purchase, inventory receipt",Group,RM,All,,1301000
+USSE,"Purchase, expenditure for product",Group,RM,All,,5101000
+USSE,Purchase expenditure for expense,Group,SVC,All,,5201000
+USSE,Inter-unit receivable,Group,FG,All,,1315000
+USSE,Inter-unit payable,Group,FG,All,,2315000
+USSE,Inter-unit receivable,Group,RM,All,,1315000
+USSE,Inter-unit payable,Group,RM,All,,2315000
+DEMF,Inventory receipt,Group,FG,All,,1303000
+DEMF,Inventory issue,Group,FG,All,,1303000
+DEMF,"Inventory expenditure, profit",Group,FG,All,,5101000
+DEMF,"Inventory expenditure, loss",Group,FG,All,,5101000
+DEMF,"Purchase expenditure, un-invoiced",Group,FG,All,,2102000
+DEMF,"Purchase, inventory receipt",Group,FG,All,,1303000
+DEMF,"Purchase, expenditure for product",Group,FG,All,,5101000
+DEMF,"Cost of units, delivered",Group,FG,All,,1303000
+DEMF,"Cost of goods sold, delivered",Group,FG,All,,5101000
+DEMF,"Cost of units, invoiced",Group,FG,All,,1303000
+DEMF,"Cost of goods sold, invoiced",Group,FG,All,,5101000
+DEMF,Revenue,Group,FG,All,,4101000
+DEMF,"Deferred revenue on delivery",Group,FG,All,,2301000
+DEMF,"Deferred revenue offset on delivery",Group,FG,All,,4101000
+DEMF,"Deferred sales tax on delivery",Group,FG,All,,2210000
+DEMF,Inventory receipt,Group,RM,All,,1301000
+DEMF,Inventory issue,Group,RM,All,,1301000
+DEMF,"Inventory expenditure, profit",Group,RM,All,,5101000
+DEMF,"Inventory expenditure, loss",Group,RM,All,,5101000
+DEMF,"Purchase expenditure, un-invoiced",Group,RM,All,,2102000
+DEMF,"Purchase, inventory receipt",Group,RM,All,,1301000
+DEMF,"Purchase, expenditure for product",Group,RM,All,,5101000
+DEMF,Purchase expenditure for expense,Group,SVC,All,,5201000
+DEMF,Inter-unit receivable,Group,FG,All,,1315000
+DEMF,Inter-unit payable,Group,FG,All,,2315000
+DEMF,Inter-unit receivable,Group,RM,All,,1315000
+DEMF,Inter-unit payable,Group,RM,All,,2315000
+GBMF,Inventory receipt,Group,FG,All,,1303000
+GBMF,Inventory issue,Group,FG,All,,1303000
+GBMF,"Inventory expenditure, profit",Group,FG,All,,5101000
+GBMF,"Inventory expenditure, loss",Group,FG,All,,5101000
+GBMF,"Purchase expenditure, un-invoiced",Group,FG,All,,2102000
+GBMF,"Purchase, inventory receipt",Group,FG,All,,1303000
+GBMF,"Purchase, expenditure for product",Group,FG,All,,5101000
+GBMF,"Cost of units, delivered",Group,FG,All,,1303000
+GBMF,"Cost of goods sold, delivered",Group,FG,All,,5101000
+GBMF,"Cost of units, invoiced",Group,FG,All,,1303000
+GBMF,"Cost of goods sold, invoiced",Group,FG,All,,5101000
+GBMF,Revenue,Group,FG,All,,4101000
+GBMF,"Deferred revenue on delivery",Group,FG,All,,2301000
+GBMF,"Deferred revenue offset on delivery",Group,FG,All,,4101000
+GBMF,"Deferred sales tax on delivery",Group,FG,All,,2210000
+GBMF,Inventory receipt,Group,RM,All,,1301000
+GBMF,Inventory issue,Group,RM,All,,1301000
+GBMF,"Inventory expenditure, profit",Group,RM,All,,5101000
+GBMF,"Inventory expenditure, loss",Group,RM,All,,5101000
+GBMF,"Purchase expenditure, un-invoiced",Group,RM,All,,2102000
+GBMF,"Purchase, inventory receipt",Group,RM,All,,1301000
+GBMF,"Purchase, expenditure for product",Group,RM,All,,5101000
+GBMF,Purchase expenditure for expense,Group,SVC,All,,5201000
+GBMF,Inter-unit receivable,Group,FG,All,,1315000
+GBMF,Inter-unit payable,Group,FG,All,,2315000
+GBMF,Inter-unit receivable,Group,RM,All,,1315000
+GBMF,Inter-unit payable,Group,RM,All,,2315000

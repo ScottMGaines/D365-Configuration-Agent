@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Record To Report Implementation Dashboard</title>
+    <style>
+        :root {
+            --bg: #f4f7f8;
+            --card: #ffffff;
+            --text: #1f2933;
+            --muted: #5b6670;
+            --border: #d7dee3;
+            --not-implemented: #9aa5b1;
+            --in-progress: #1d7a8c;
+            --implemented: #1f9d55;
+            --error: #c23030;
+            --warn-bg: #fff4da;
+            --ok-bg: #e9f8ef;
+            --err-bg: #fdecec;
+            --na-bg: #eef2f5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 5% 5%, #dbe7ec 0%, transparent 25%),
+                radial-gradient(circle at 95% 10%, #e5efe2 0%, transparent 20%),
+                var(--bg);
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .top-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin: 14px 0 18px 0;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .status-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .status-card {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        .status-card h3 {
+            margin: 0;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .status-card p {
+            margin: 8px 0 0 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1700px;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid var(--border);
+            padding: 9px 10px;
+            vertical-align: top;
+            font-size: 13px;
+            line-height: 1.35;
+            text-align: left;
+        }
+
+        th {
+            background: #eef3f5;
+            color: #27343c;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tr:hover td {
+            background: #f9fbfc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .status-not-implemented {
+            color: #34414d;
+            background: var(--na-bg);
+            border: 1px solid #d3dbe1;
+        }
+
+        .status-in-progress {
+            color: #0d4f5c;
+            background: var(--warn-bg);
+            border: 1px solid #f3d899;
+        }
+
+        .status-implemented {
+            color: #1a5f3d;
+            background: var(--ok-bg);
+            border: 1px solid #bfe7cd;
+        }
+
+        .status-error {
+            color: #7b1f1f;
+            background: var(--err-bg);
+            border: 1px solid #f1bbbb;
+        }
+
+        .legend {
+            margin: 14px 0;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .legend span {
+            font-size: 12px;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 4px 9px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            display: inline-block;
+        }
+
+        .dot-not-implemented {
+            background: var(--not-implemented);
+        }
+
+        .dot-in-progress {
+            background: var(--in-progress);
+        }
+
+        .dot-implemented {
+            background: var(--implemented);
+        }
+
+        .dot-error {
+            background: var(--error);
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Record To Report Implementation Dashboard</h1>
+    <div class="muted">Last refresh: <span id="lastRefresh">2026-04-01 04:18 UTC</span></div>
+
+    <div class="top-meta">
+        <div class="card">
+            <strong>Process</strong>
+            <div>Record_To_Report</div>
+        </div>
+        <div class="card">
+            <strong>Implementation File</strong>
+            <div>Processes/Implement_Record_To_Report.template.md</div>
+        </div>
+        <div class="card">
+            <strong>Target Legal Entities</strong>
+            <div>USMF, USSE, DEMF, GBMF</div>
+        </div>
+        <div class="card">
+            <strong>Coordinator</strong>
+            <div>Project Manager</div>
+        </div>
+    </div>
+
+    <div class="status-cards">
+        <div class="status-card">
+            <h3>Not Implemented</h3>
+            <p id="count-not-implemented">0</p>
+        </div>
+        <div class="status-card">
+            <h3>Currently Being Implemented</h3>
+            <p id="count-in-progress">0</p>
+        </div>
+        <div class="status-card">
+            <h3>Implemented</h3>
+            <p id="count-implemented">0</p>
+        </div>
+        <div class="status-card">
+            <h3>Error</h3>
+            <p id="count-error">0</p>
+        </div>
+        <div class="status-card">
+            <h3>Total Items</h3>
+            <p id="count-total">0</p>
+        </div>
+    </div>
+
+    <h2>Solution Consultant Instance Registry</h2>
+    <div class="table-wrap" style="margin-bottom: 16px;">
+        <table id="instanceTable">
+            <thead>
+                <tr>
+                    <th>Instance</th>
+                    <th>Item ID</th>
+                    <th>Work Item</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SC-1</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Available</td>
+                </tr>
+                <tr>
+                    <td>SC-2</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Available</td>
+                </tr>
+                <tr>
+                    <td>SC-3</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Available</td>
+                </tr>
+                <tr>
+                    <td>SC-4</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Available</td>
+                </tr>
+                <tr>
+                    <td>SC-5</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Available</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="legend">
+        <span><i class="dot dot-not-implemented"></i>Not Implemented (gray)</span>
+        <span><i class="dot dot-in-progress"></i>Currently Being Implemented (amber/blue)</span>
+        <span><i class="dot dot-implemented"></i>Implemented (green)</span>
+        <span><i class="dot dot-error"></i>Error (red)</span>
+    </div>
+
+    <h2>Status Table</h2>
+    <div class="table-wrap">
+        <table id="statusTable">
+            <thead>
+                <tr>
+                    <th>Item ID</th>
+                    <th>Phase</th>
+                    <th>Owner Agent</th>
+                    <th>Agent Instance</th>
+                    <th>Work Item</th>
+                    <th>Status</th>
+                    <th>Current Activity</th>
+                    <th>Completed Detail</th>
+                    <th>Next Step</th>
+                    <th>Last Updated</th>
+                    <th>Error</th>
+                    <th>Error Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-status="Implemented">
+                    <td>RV-001</td>
+                    <td>Requirements Validation</td>
+                    <td>Solution Architect</td>
+                    <td></td>
+                    <td>Validate R2R implementation readiness from implementation workbook</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Readiness re-validation completed after stakeholder confirmations</td>
+                    <td>Workbook validated with finalized decisions, budget model count set to 1, closed risks, and
+                        populated handoff payload</td>
+                    <td>Dispatch PI/DR items in dependency-aware waves</td>
+                    <td>2026-03-31 09:35 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+
+                <tr data-status="Implemented">
+                    <td>PI-001</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Define accounting policies setup (legal entities, ledger, CoA, dimensions, calendars, exchange
+                        governance)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Advanced-rule and structure activation remediation completed; cross-entity ledger linkage
+                        completed</td>
+                    <td>Reworked activation constraints and reran activation pipeline. Batch jobs 5637154336 and
+                        5637154337 finished successfully. FAB_BS/FAB_PL are Active and linked in USMF, USSE, DEMF, GBMF.
+                    </td>
+                    <td>Run dependency check and dispatch next eligible PI item (PI-002)</td>
+                    <td>2026-04-01 00:24 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>PI-002</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Manage cash setup (bank governance, liquidity mapping, reconciliation, forecasting controls)
+                    </td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Cash and bank governance configured and validated across all in-scope legal entities</td>
+                    <td>Validated liquidity mappings and reconciliation flags for USMF/USSE/DEMF/GBMF, confirmed
+                        forecasting journals and source coverage, and created missing GBCFM90 minimum cash balance
+                        control (GBP 20000).</td>
+                    <td>Run dependency check and dispatch PI-003</td>
+                    <td>2026-04-01 01:05 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>PI-003</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-2</td>
+                    <td>Manage budgets setup (budget cycles/models/control/planning governance)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Budget model, cycle, and budget-control governance configured and validated across in-scope
+                        entities</td>
+                    <td>Validated OPEX_BASE in USMF, created ANNUAL budget cycle time span for DEF2026, enabled budget
+                        control on ledgers for USMF/USSE/DEMF/GBMF, set 10% threshold defaults, and configured budget
+                        planning security-role governance records for all in-scope entities.</td>
+                    <td>Run dependency check and dispatch PI-004</td>
+                    <td>2026-04-01 01:18 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>PI-004</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-3</td>
+                    <td>Record financial transactions setup (journals, voucher controls, approvals, accruals,
+                        allocations)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Journal governance, allocation controls, and accrual-control-account remediation completed</td>
+                    <td>Created shared accrual liability account 2201000 in FAB-GL, preserved ACCRUAL journal governance
+                        with AJRN across USMF/USSE/DEMF/GBMF, and documented workflow-definition/version activation as
+                        deferred due to MCP surface limitation.</td>
+                    <td>Run dependency check and dispatch PI-005</td>
+                    <td>2026-04-01 01:33 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>PI-005</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Close financial periods setup (close templates, dependencies, revaluation, year-end policy)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Financial close templates, dependencies, settlement controls, and year-end policy configured
+                    </td>
+                    <td>Configured ME-CLOSE and YE-CLOSE templates with AP/AR/GL sequence, added settlement controls for
+                        1101000/1102000/1103000/1104000/2201000, enabled FX revaluation on liquidity accounts, and
+                        validated retained earnings account 3100000 for year-end close.</td>
+                    <td>Run dependency check and dispatch PI-006</td>
+                    <td>2026-04-01 02:20 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>PI-006</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Analyze financial performance setup (financial reporting architecture, variance governance)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Financial reporting surfaces and variance-governance controls validated across in-scope entities
+                    </td>
+                    <td>Validated financial reporting access in USMF/USSE/DEMF/GBMF and confirmed 10%
+                        variance-governance defaults with ANNUAL/DEF2026 fiscal-year configuration across entities.</td>
+                    <td>Run dependency check and dispatch PI-007</td>
+                    <td>2026-04-01 02:28 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>PI-007</td>
+                    <td>Process Implementation</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-2</td>
+                    <td>Execute and evidence R2R validation scenarios listed in workbook</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Closed as Implemented (Exception-Accepted) after explicit stakeholder approvals</td>
+                    <td>Project-backed proof remains deferred by approved scope. FX evidence exception and
+                        financial-report package-run evidence exception were explicitly approved for this phase due
+                        environment/MCP constraints.</td>
+                    <td>Proceed to Data Load Readiness dispatch (DR-001 onward)</td>
+                    <td>2026-04-01 03:08 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+
+                <tr data-status="Implemented">
+                    <td>DR-001</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for external Main Accounts load (MainAccountEntity)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Main account load readiness validated against shared CoA and entity mappings</td>
+                    <td>Validated MainAccountEntity prerequisites for FAB-GL across USMF/USSE/DEMF/GBMF, including
+                        required fields, duplicate baseline checks, and dependency readiness. No import executed.</td>
+                    <td>Run dependency check and dispatch DR-002</td>
+                    <td>2026-04-01 03:14 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>DR-002</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for financial dimension values load</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Dimension-value import readiness validated across shared-dimension architecture</td>
+                    <td>Confirmed dimension attributes, FinancialDimensionValues metadata prerequisites, and alignment
+                        to active FAB_BS/FAB_PL structures and ledger assignments in USMF/USSE/DEMF/GBMF. No import
+                        executed.</td>
+                    <td>Run dependency check and dispatch DR-003</td>
+                    <td>2026-04-01 03:20 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>DR-003</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for exchange rates load</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Exchange-rate provider and import-parameter readiness validated</td>
+                    <td>Configured ECB provider (Central Bank of Europe) and validated Closing rate type plus import
+                        parameter selection path while preserving existing pairs and baseline rates.</td>
+                    <td>Run dependency check and dispatch DR-004</td>
+                    <td>2026-04-01 03:31 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>DR-004</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for bank accounts load</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Bank-account load readiness validated across all in-scope legal entities</td>
+                    <td>Validated keys, duplicate baseline, liquidity mapping, currency alignment, and reconciliation
+                        flags for US-BANK01/USS-BANK01/DE-BANK01/UK-BANK01. Advisory only: set BankStatementFormatId
+                        before automated statement import and keep source BankAccountId length <=10.< /td>
+                    <td>Run dependency check and dispatch DR-005</td>
+                    <td>2026-04-01 03:38 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>DR-005</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for budget account entries load (Budget Account Entries data entity)</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Agent-controllable budget-entry readiness prerequisites remediated and validated</td>
+                    <td>Created OriginalBudget code ORIGFY26 in USMF/USSE/DEMF/GBMF, validated BCR-001 governance
+                        baseline and Budget Account Entries metadata/keys. No import executed.</td>
+                    <td>Manual external dependencies remain: execute imports #1/#2 before running Budget Account Entries
+                        import</td>
+                    <td>2026-04-01 04:05 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>DR-006</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for intercompany due-to and due-from mapping load</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Intercompany pair-matrix readiness remediated and validated to full reciprocal coverage</td>
+                    <td>Validated prerequisites and created 10 missing LedgerInterCompanyAccounts rows, achieving 12/12
+                        reciprocal pair coverage across USMF/USSE/DEMF/GBMF without duplicates.</td>
+                    <td>Governance follow-up: update Controller Team sign-off checklist from TBC to Complete</td>
+                    <td>2026-04-01 04:12 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>DR-007</td>
+                    <td>Data Load Readiness</td>
+                    <td>Solution Consultant</td>
+                    <td>SC-1</td>
+                    <td>Validate readiness for opening balance journal load</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Opening-balance readiness blocker remediated through fiscal period and status setup</td>
+                    <td>Created FY2026 fiscal periods (OPEN, P01-P13), created legal-entity period-status rows for
+                        USMF/USSE/DEMF/GBMF, and opened OPEN/P01 posting windows. Readiness re-check passed.</td>
+                    <td>Data readiness phase complete; proceed with external manual imports per sequencing</td>
+                    <td>2026-04-01 04:18 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+
+                <tr data-status="Implemented">
+                    <td>FN-001</td>
+                    <td>Finalization</td>
+                    <td>Project Manager</td>
+                    <td></td>
+                    <td>Create final implementation summary markdown artifact</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Final implementation summary generated and updated to terminal state</td>
+                    <td>Produced Output/Record_To_Report_Implementation_Summary.md with final phase outcomes, exception
+                        notes, and external handoff dependencies.</td>
+                    <td>Finalize dashboard snapshot</td>
+                    <td>2026-04-01 04:18 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+                <tr data-status="Implemented">
+                    <td>FN-002</td>
+                    <td>Finalization</td>
+                    <td>Project Manager</td>
+                    <td></td>
+                    <td>Finalize dashboard snapshot with all terminal statuses</td>
+                    <td><span class="badge status-implemented">Implemented</span></td>
+                    <td>Dashboard finalized with terminal statuses and refresh timestamp</td>
+                    <td>All items are now in terminal state with status narrative and error fields resolved.</td>
+                    <td>Handoff complete</td>
+                    <td>2026-04-01 04:18 UTC</td>
+                    <td>No</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function updateCounts() {
+            const rows = document.querySelectorAll("#statusTable tbody tr");
+            let notImplemented = 0;
+            let inProgress = 0;
+            let implemented = 0;
+            let error = 0;
+
+            rows.forEach((row) => {
+                const status = row.getAttribute("data-status");
+                if (status === "Not Implemented") notImplemented += 1;
+                if (status === "Currently Being Implemented") inProgress += 1;
+                if (status === "Implemented") implemented += 1;
+                if (status === "Error") error += 1;
+            });
+
+            document.getElementById("count-not-implemented").textContent = String(notImplemented);
+            document.getElementById("count-in-progress").textContent = String(inProgress);
+            document.getElementById("count-implemented").textContent = String(implemented);
+            document.getElementById("count-error").textContent = String(error);
+            document.getElementById("count-total").textContent = String(rows.length);
+        }
+
+        updateCounts();
+    </script>
+</body>
+
+</html>

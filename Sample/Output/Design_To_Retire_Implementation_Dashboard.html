@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design To Retire Implementation Dashboard</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1d2433;
+      --muted: #5a6478;
+      --border: #dde3ef;
+      --not: #9aa3b2;
+      --inprogress: #d98c00;
+      --done: #1f8f4e;
+      --error: #be2f2f;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: Segoe UI, Tahoma, sans-serif;
+    }
+    h1 { margin: 0 0 8px; }
+    .sub { color: var(--muted); margin-bottom: 20px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .card .label { color: var(--muted); font-size: 12px; }
+    .card .value { font-size: 28px; font-weight: 700; margin-top: 6px; }
+    .legend {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 10px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+    .wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 1650px;
+      font-size: 13px;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      background: #f0f4fb;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      white-space: nowrap;
+    }
+    tbody td {
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      padding: 10px;
+    }
+    .status {
+      color: #fff;
+      font-weight: 600;
+      border-radius: 999px;
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .not { background: var(--not); }
+    .inprogress { background: var(--inprogress); }
+    .done { background: var(--done); }
+    .err { background: var(--error); }
+    .small { color: var(--muted); font-size: 12px; }
+    @media (max-width: 900px) {
+      body { padding: 14px; }
+      .cards { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Design-to-Retire Implementation Dashboard</h1>
+  <div class="sub">Process: Design_To_Retire | Last refresh: <strong id="refresh">2026-04-01 16:38 local</strong></div>
+
+  <div class="cards">
+    <div class="card"><div class="label">Not Implemented</div><div class="value" id="count-not">0</div></div>
+    <div class="card"><div class="label">Currently Being Implemented</div><div class="value" id="count-in">0</div></div>
+    <div class="card"><div class="label">Implemented</div><div class="value" id="count-done">0</div></div>
+    <div class="card"><div class="label">Error</div><div class="value" id="count-err">0</div></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background: var(--not)"></span>Not Implemented</span>
+    <span><span class="dot" style="background: var(--inprogress)"></span>Currently Being Implemented</span>
+    <span><span class="dot" style="background: var(--done)"></span>Implemented</span>
+    <span><span class="dot" style="background: var(--error)"></span>Error</span>
+  </div>
+
+  <div class="wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Item ID</th>
+          <th>Phase</th>
+          <th>Owner Agent</th>
+          <th>Agent Instance</th>
+          <th>Work Item</th>
+          <th>Status</th>
+          <th>Current Activity</th>
+          <th>Completed Detail</th>
+          <th>Next Step</th>
+          <th>Last Updated</th>
+          <th>Error</th>
+          <th>Error Description</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr data-status="Implemented"><td>D2R-P1-001</td><td>Requirements Validation</td><td>Solution Architect</td><td></td><td>Validate Design-to-Retire implementation workbook readiness and identify any blockers/gaps.</td><td><span class="status done">Implemented</span></td><td>Readiness workflow resumed with user directive to apply Microsoft best practices to all blockers.</td><td>All 8 blockers resolved in workbook; final readiness verdict Ready in Output/Design_To_Retire_Readiness_Report.md.</td><td>Start Phase 2 dependency-gated Solution Consultant dispatch.</td><td>2026-04-01 14:42 local</td><td>No</td><td></td></tr>
+
+        <tr data-status="Implemented"><td>D2R-P2-001</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Configure number sequences including BOM automatic numbering and ECM-related sequences.</td><td><span class="status done">Implemented</span></td><td>SC-1 completed number sequence configuration and validation in D365.</td><td>BOM sequences Bill_4/Bill_5/Bill_6/Bill_7 switched to Automatic; ECM sequences verified compliant; evidence captured in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for next queued implementation item.</td><td>2026-04-01 14:50 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-002</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Set engineering organization and product governance baseline including version product dimension group.</td><td><span class="status done">Implemented</span></td><td>SC-1 completed engineering organization and version dimension baseline in USMF.</td><td>Engineering organization USMF created/validated; product dimension group Version active; evidence logged in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for D2R-P2-003.</td><td>2026-04-01 14:56 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-003</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Create storage and tracking dimension groups and assign to released product policies.</td><td><span class="status done">Implemented</span></td><td>SC-1 completed dimension groups and release-template policy assignments.</td><td>SITE_WH, SER_FG, NONE created; templates FG-BASE/RM-BASE linked to USMF release rules; evidence logged in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for D2R-P2-004.</td><td>2026-04-01 15:01 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-004</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Configure lifecycle states and transaction controls for Pre-production, Active, End-of-Life.</td><td><span class="status done">Implemented</span></td><td>SC-1 configured and validated lifecycle-state transaction controls in USMF.</td><td>Pre-production and End-of-Life states created; purchasing/production process policies updated and validated; evidence in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for D2R-P2-005.</td><td>2026-04-01 15:06 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-005</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Configure item model groups, item groups, and production design controls (BOM, route, reservation policy).</td><td><span class="status done">Implemented</span></td><td>SC-1 configured item model groups, item groups, and reservation policy in USMF.</td><td>FG-STD/RM-STD and FG/RM/SVC configured; production reservation set to Release; evidence logged in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for D2R-P2-006.</td><td>2026-04-01 15:11 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-006</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Enable and configure ECM controls (ECR/ECO, effective dating, no retroactive changes).</td><td><span class="status done">Implemented</span></td><td>SC-1 completed ECM baseline controls and validations in USMF.</td><td>ECO/ECR defaults and effective-date enforcement configured and validated; evidence logged in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for D2R-P2-007.</td><td>2026-04-01 15:16 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-007</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Configure standard costing foundation: costing versions, cost groups, variance and cost breakdown policy.</td><td><span class="status done">Implemented</span></td><td>SC-1 completed standard costing foundation configuration in USMF.</td><td>Costing versions STD-CURR/PLAN-NEXT, cost groups M/L/O/I, and inventory accounting variance controls configured and validated.</td><td>Run SA dependency check for D2R-P2-008.</td><td>2026-04-01 15:20 local</td><td>No</td><td></td></tr>
+        <tr data-status="Error"><td>D2R-P2-008</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-3</td><td>Configure quality management baseline, tests, groups, quarantine, and quality associations.</td><td><span class="status err">Error</span></td><td>Third execution attempt returned empty payload despite strict response requirements.</td><td>No completion evidence returned by assigned agent; D365 change state cannot be proven from this run.</td><td>Proceed with remaining phases; re-run this item with direct evidence capture after phase closure.</td><td>2026-04-01 16:12 local</td><td>Yes</td><td>Repeated child-agent communication failure (empty output) prevented auditable completion evidence for D2R-P2-008.</td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-009</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Configure End-of-Life retirement controls and disposition policy.</td><td><span class="status done">Implemented</span></td><td>SC-1 completed End-of-Life transaction blocking and policy controls in USMF.</td><td>All purchasing/production/sales processes blocked for EOL items; inventory disposition enabled; evidence logged in Output/Design_To_Retire_Implementation_log.md.</td><td>Run SA dependency check for D2R-P2-010.</td><td>2026-04-01 15:32 local</td><td>No</td><td></td></tr>
+        <tr data-status="Implemented"><td>D2R-P2-010</td><td>Process Implementation</td><td>Solution Consultant</td><td>SC-1</td><td>Configure approved vendor list governance and item-level check method policy.</td><td><span class="status done">Implemented</span></td><td>SC-1 completed AVL item-level policy configuration in USMF.</td><td>RM-BASE template set to WarningOnly check method; evidence logged in Output/Design_To_Retire_Implementation_log.md.</td><td>Start Phase 3: Data Load Readiness validation.</td><td>2026-04-01 15:35 local</td><td>No</td><td></td></tr>
+
+        <tr data-status="Implemented"><td>D2R-P3-001</td><td>Data Load Readiness</td><td>Solution Consultant</td><td>SC-2</td><td>Validate readiness for Products V2 and Released products V2 imports across USMF, USSE, DEMF, GBMF.</td><td><span class="status done">Implemented</span></td><td>Blocker remediation completed and validated across operational entities.</td><td>FG-STD and RM-STD now exist in USSE, DEMF, and GBMF with StdCost model, Physical negative Yes, Financial negative No. Validation evidence recorded in Output/Design_To_Retire_Implementation_log.md.</td><td>Proceed to D2R-P3-002 dependency check and dispatch.</td><td>2026-04-01 16:02 local</td><td>No</td><td></td></tr>
+        <tr data-status="Error"><td>D2R-P3-002</td><td>Data Load Readiness</td><td>Solution Consultant</td><td>SC-1</td><td>Validate readiness for BOM and Route baseline imports including referential integrity prerequisites.</td><td><span class="status err">Error</span></td><td>SC-1 completed validation and identified inherited prerequisites not yet completed for BOM/Route imports.</td><td>BLK-001 resolved; new blockers identified: released-products import not executed in all entities, missing operational sites, and missing base operations. See Output/Design_To_Retire_Implementation_log_D2R-P3-002_Validation.md.</td><td>Complete prerequisite setup/imports then re-run P3-002 readiness.</td><td>2026-04-01 16:20 local</td><td>Yes</td><td>BOM/Route readiness blocked until Released products V2 import completes in all entities and manufacturing site/operation foundation exists.</td></tr>
+        <tr data-status="Error"><td>D2R-P3-003</td><td>Data Load Readiness</td><td>Solution Consultant</td><td>SC-1</td><td>Validate readiness for standard cost component imports and quarterly cost rollup prerequisites.</td><td><span class="status err">Error</span></td><td>SC-1 completed validation and identified cross-entity costing prerequisites not configured.</td><td>USMF partial-ready only; blockers include missing costing versions/cost groups in USSE/DEMF/GBMF, missing route cost categories, missing costing sheet nodes, and dependency on released-products import. See Output/Design_To_Retire_Implementation_log_D2R-P3-003_Validation.md.</td><td>Configure missing costing prerequisites and re-run P3-003 readiness validation.</td><td>2026-04-01 16:26 local</td><td>Yes</td><td>Standard-cost component import readiness blocked by missing costing foundation in operational entities and unresolved route/cost-sheet dependencies.</td></tr>
+        <tr data-status="Error"><td>D2R-P3-004</td><td>Data Load Readiness</td><td>Solution Consultant</td><td>SC-1</td><td>Validate readiness for lifecycle state assignments and approved vendor list imports.</td><td><span class="status err">Error</span></td><td>SC-1 completed validation; USMF ready, operational entities blocked by missing prerequisite masters.</td><td>USSE/DEMF/GBMF blocked due to missing released products and vendor masters required for lifecycle assignment and AVL import keys. See Output/Design_To_Retire_Implementation_log_D2R-P3-004_Validation.md.</td><td>Load released products and vendors in operational entities, then re-run P3-004 readiness.</td><td>2026-04-01 16:31 local</td><td>Yes</td><td>Lifecycle assignment and approved-vendor import readiness blocked in USSE/DEMF/GBMF by missing ItemNumber and VendorAccount keys.</td></tr>
+        <tr data-status="Error"><td>D2R-P3-005</td><td>Data Load Readiness</td><td>Solution Consultant</td><td>SC-1</td><td>Validate readiness for unit of measure conversion import and open ECO manual re-entry handoff.</td><td><span class="status err">Error</span></td><td>SC-1 completed validation and found cross-entity readiness gaps for UoM conversions and ECO handoff package.</td><td>UnitOfMeasureConversions empty, operational entities lack released products for ECO linkage, and ECO manual-reentry handoff artifacts are missing. See Output/Design_To_Retire_Implementation_log_D2R-P3-005_Validation.md.</td><td>Create missing UoM baseline and ECO handoff assets, then re-run P3-005 readiness.</td><td>2026-04-01 16:36 local</td><td>Yes</td><td>UoM conversion and ECO manual re-entry readiness blocked by missing conversion baseline and missing operational master/handoff prerequisites.</td></tr>
+
+        <tr data-status="Implemented"><td>D2R-P4-001</td><td>Finalization</td><td>Project Manager</td><td></td><td>Produce final implementation summary with phase outcomes, deliverables, blockers, and handoff actions.</td><td><span class="status done">Implemented</span></td><td>Final implementation summary compiled and published.</td><td>Summary written to Output/Design_To_Retire_Implementation_Summary.md with phase outcomes, blocker register, and handoff actions.</td><td>Begin follow-up cycle for unresolved blocker rows.</td><td>2026-04-01 16:38 local</td><td>No</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function countByStatus() {
+      const rows = document.querySelectorAll('#rows tr');
+      let notCount = 0;
+      let inCount = 0;
+      let doneCount = 0;
+      let errCount = 0;
+      rows.forEach(r => {
+        const s = r.getAttribute('data-status');
+        if (s === 'Not Implemented') notCount++;
+        if (s === 'Currently Being Implemented') inCount++;
+        if (s === 'Implemented') doneCount++;
+        if (s === 'Error') errCount++;
+      });
+      document.getElementById('count-not').textContent = String(notCount);
+      document.getElementById('count-in').textContent = String(inCount);
+      document.getElementById('count-done').textContent = String(doneCount);
+      document.getElementById('count-err').textContent = String(errCount);
+    }
+    countByStatus();
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Secrets and Sensitive Files
+*.secret.json
+*.secret.txt
+appsettings.local.json
+appsettings.Development.json
+.env
+.env.*
+config.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Data Package Files
+*.zip
+DataPackages/
+
+# Error Logs
+*_Errors_*.csv
+Import_Errors_*.csv
+
+# Backup Files
+*.bak
+*.backup
+
+# VS Code
+.vscode/settings.json
+.vscode/mcp.json

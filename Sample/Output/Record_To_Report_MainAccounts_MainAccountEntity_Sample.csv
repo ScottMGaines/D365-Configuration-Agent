@@ -1,0 +1,75 @@
+ChartOfAccounts,MainAccountId,Name
+FAB-GL,1110000,Cash - Petty Cash
+FAB-GL,1120000,Cash - Payroll Clearing
+FAB-GL,1201000,Accounts Receivable - Trade
+FAB-GL,1202000,Allowance for Doubtful Accounts
+FAB-GL,1210000,Unbilled Receivables
+FAB-GL,1301000,Inventory - Raw Materials
+FAB-GL,1302000,Inventory - Work In Process
+FAB-GL,1303000,Inventory - Finished Goods
+FAB-GL,1401000,Prepaid Insurance
+FAB-GL,1402000,Prepaid Rent
+FAB-GL,1501000,Fixed Assets - Buildings
+FAB-GL,1502000,Fixed Assets - Machinery
+FAB-GL,1503000,Fixed Assets - Furniture and Fixtures
+FAB-GL,1510000,Accumulated Depreciation - Buildings
+FAB-GL,1511000,Accumulated Depreciation - Machinery
+FAB-GL,1512000,Accumulated Depreciation - Furniture
+FAB-GL,1601000,Intangible Assets - Software
+FAB-GL,1701000,Security Deposits
+FAB-GL,1801000,Deferred Tax Asset
+FAB-GL,2101000,Accounts Payable - Trade
+FAB-GL,2102000,Accrued Expenses
+FAB-GL,2103000,Payroll Liabilities
+FAB-GL,2210000,Sales Tax Payable
+FAB-GL,2220000,VAT Payable
+FAB-GL,2230000,Interest Payable
+FAB-GL,2301000,Deferred Revenue
+FAB-GL,2401000,Short-Term Debt
+FAB-GL,2501000,Lease Liability - Current
+FAB-GL,2601000,Lease Liability - Noncurrent
+FAB-GL,2701000,Long-Term Debt
+FAB-GL,2801000,Deferred Tax Liability
+FAB-GL,2901000,Other Long-Term Liabilities
+FAB-GL,3201000,Common Stock
+FAB-GL,3202000,Additional Paid-In Capital
+FAB-GL,3301000,Treasury Stock
+FAB-GL,3401000,Current Year Earnings
+FAB-GL,3501000,Other Comprehensive Income
+FAB-GL,4101000,Product Revenue - Domestic
+FAB-GL,4102000,Product Revenue - International
+FAB-GL,4201000,Service Revenue - Field Services
+FAB-GL,4202000,Service Revenue - Maintenance
+FAB-GL,4301000,Project Revenue
+FAB-GL,4401000,Freight Revenue
+FAB-GL,4501000,Other Operating Revenue
+FAB-GL,4601000,Intercompany Revenue
+FAB-GL,4701000,Revaluation Gain
+FAB-GL,5101000,Cost of Goods Sold - Materials
+FAB-GL,5102000,Cost of Goods Sold - Labor
+FAB-GL,5103000,Cost of Goods Sold - Overhead
+FAB-GL,5201000,Cost of Services - Direct Labor
+FAB-GL,5202000,Cost of Services - Subcontractors
+FAB-GL,5301000,Freight Out Expense
+FAB-GL,5401000,Inventory Write-Down
+FAB-GL,5501000,Warranty Expense
+FAB-GL,5601000,Intercompany Cost of Sales
+FAB-GL,5701000,Revaluation Loss
+FAB-GL,6101000,Salaries and Wages
+FAB-GL,6102000,Payroll Taxes
+FAB-GL,6103000,Employee Benefits
+FAB-GL,6201000,Rent Expense
+FAB-GL,6202000,Utilities Expense
+FAB-GL,6203000,Office Supplies Expense
+FAB-GL,6301000,IT Hosting Expense
+FAB-GL,6302000,Software Subscriptions
+FAB-GL,6401000,Professional Fees
+FAB-GL,6402000,Audit and Tax Fees
+FAB-GL,6501000,Travel and Entertainment
+FAB-GL,6502000,Training and Development
+FAB-GL,6601000,Marketing Expense
+FAB-GL,6602000,Sales Commissions
+FAB-GL,6701000,Bad Debt Expense
+FAB-GL,6801000,Depreciation Expense
+FAB-GL,6802000,Amortization Expense
+FAB-GL,6901000,Miscellaneous Operating Expense
