@@ -1,0 +1,13 @@
+{
+	"servers": {
+		"microsoftdocs/mcp": {
+			"type": "http",
+			"url": "https://learn.microsoft.com/api/mcp"
+		},
+		"dynamics365": {
+			"url": "https://<your-org>.operations.dynamics.com/mcp",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}

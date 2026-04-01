@@ -24,4 +24,3 @@ Import_Errors_*.csv
 
 # VS Code
 .vscode/settings.json
-.vscode/mcp.json
