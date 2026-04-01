@@ -5,7 +5,7 @@
 			"url": "https://learn.microsoft.com/api/mcp"
 		},
 		"dynamics365": {
-			"url": "https://<your-org>.operations.dynamics.com/mcp",
+			"url": "https://<your-org-test>.operations.dynamics.com/mcp",
 			"type": "http"
 		}
 	},
