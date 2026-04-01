@@ -5,7 +5,6 @@ appsettings.local.json
 appsettings.Development.json
 .env
 .env.*
-config.json
 *.pem
 *.key
 *.p12
